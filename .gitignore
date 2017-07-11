@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+botsocket
+package-lock.json
+install.sh
+config.js
