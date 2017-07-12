@@ -7,10 +7,16 @@ module.exports = {
     defaults: {
         locale: 'ru',
         precision: {
-            ru: 0,
-            en: 2,
+            RUB:  0,
+            USD:  2,
+            BTC:  8,
             rate: 3,
         },
+        min_balance: {
+            RUB: 50,
+            USD: 1,
+            BTC: 0.0001,
+        }
     },
 
     polling: {
@@ -32,6 +38,10 @@ module.exports = {
         // allowMissing: true,
     },
 
+    open_exchange_rates: {
+        app_id: '926aca5c4dc345d7b16501b30f3d8ab8'
+    },
+
     bitcoind: {
         host: 'localhost',
         port: 8332,
@@ -45,11 +55,6 @@ module.exports = {
         password: 'Tovuva52',
     },
 
-    // coinigy_credentials: {
-    //     apiKey: "5071551af2ee3294cebf085369a245de",
-    //     apiSecret: "ecde1706342741df56fc478c9391f600"
-    // },
-
     game_factory: {
         famount: 3,              // Величина роста курса в USD
         f1: 65,                  // Регулятор частоты трансформации курса в %
@@ -62,9 +67,7 @@ module.exports = {
         }
     },
 
-    // root: path.resolve(__dirname, ''),
-
-    UPDATE_RATES_INTERVAL:    1,  // 1 секунда
-    BITCOIN_WATCHER_INTERVAL: 60, // 10 секунд
-    QIWI_WATCHER_INTERVAL:    60, // 20 секунд
+    UPDATE_RATES_INTERVAL:        1, // 1 секунда
+    CURRENCY_WATCHER_INTERVAL: 3600, // 1 час
+    QIWI_WATCHER_INTERVAL:     3600, // 20 секунд
 };
