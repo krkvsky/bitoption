@@ -17,6 +17,7 @@ const events = new BotEmitter(bot);
 
 const pool = mysql.createPool(config.db_options);
 
+
 bot.i18n = i18n;
 bot.pool = pool;
 
@@ -24,12 +25,15 @@ bot.use(Telegraf.memorySession());
 bot.use(Telegraf.log());
 bot.use(i18n.middleware());
 
+// module.exports = {
+//     bot: bot
+// };
+
 require('./lib/util')(bot);
-console.log('3');
+require('./lib/watchers')(bot);
 
 bot.use(async ($, next) => {
     const cid = $.chat.id;
-console.log('4');
 
     try {
         $.db = await pool.getConnection();
@@ -39,15 +43,13 @@ console.log('4');
 
         if (user) {
             $.user = user;
-console.log(5);
-console.log($.user);
 
             $.user.lang = ['ru','en'].indexOf($.user.lang) < 0 ? config.defaults.locale : $.user.lang;
             $.i18n.locale($.user.lang);
 
-            $.user.balance = $.util.rub_to_user_currency($.user.balance_rub);
-            $.user.balance_up = $.util.rub_to_user_currency($.user.balance_up_rub);
-            $.user.deposit_sum = $.util.rub_to_user_currency($.user.deposit_sum_rub);
+            $.user.balance = $.util.rub_to_user_currency($, $.user.balance_rub);
+            $.user.balance_up = $.util.rub_to_user_currency($, $.user.balance_up_rub);
+            $.user.deposit_sum = $.util.rub_to_user_currency($, $.user.deposit_sum_rub);
         }
     }
     catch (e) {
@@ -59,8 +61,6 @@ console.log($.user);
         console.log('DB Connection released');
     });
 });
-
-require('./lib/watchers')(bot);
 
 bot.use(flow.middleware());
 
@@ -212,7 +212,7 @@ bot.command('start', async ($) => {
             $.user = user;
         }
 
-        return $.reply($.i18n.t('greeting', { nickname: nickname }), $.util.startup_keyboard());
+        return $.reply($.i18n.t('greeting', { nickname: nickname }), $.util.startup_keyboard($));
     }
     catch(e) {
         console.log(e);
@@ -221,9 +221,5 @@ bot.command('start', async ($) => {
 
 bot.startPolling(config.polling.timeout, config.polling.limit);
 
-module.exports = {
-    bot: bot,
-    pool: pool
-}
 
 
