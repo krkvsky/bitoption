@@ -11,7 +11,7 @@ messages:
 common:
   seconds: 'sec'
   currency:
-    RUR: 'RUR'
+    RUB: 'RUB'
     USD: '$'
     VIR: 'virt'
 
@@ -46,7 +46,7 @@ settings:
     currency: '💶 Currency'
     hints: '💬 Hints'
     admin_panel: '🛡 Panel Sign-in'
-    rur: 'Russian Ruble'
+    rub: 'Russian Ruble'
     usd: 'US Dollar'
   answer:
     okay: '✅ Настройки активированы'
@@ -54,7 +54,7 @@ settings:
     virt_account: 'Вы выбрали виртуальный счет. Удачной игры!'
     locale_ru: 'You choose russian language! Good Luck!'
     locale_en: 'You choose english language! Good Luck!'
-    currency_rur: 'Вы выбрали Росийский рубль (RUR)! Приятной игры!'
+    currency_rub: 'Вы выбрали Росийский рубль (RUB)! Приятной игры!'
     currency_usd: 'Вы выбрали US Доллар (USD)! Приятной игры!'
     hints_on: 'Вы включили подсказки! Приятной игры!'
     hints_off: 'Вы выключили подсказки! Приятной игры!'
@@ -69,39 +69,38 @@ settings:
 
 about:
   greeting: |
-    <b>BitOption</b> – это лучшая платформа дополнительного заработка на курсе биткоина.
-    Бесплатное обучение и поддержка от персонального сапорта.
-    Регулярные акции, розыгрыши и выплаты.
-    Будь профессионалом вместе с <b>BitOption</b>!
+    <b>BitOption</b> is the best platform to make extra money on the bitcoin exchange rate.
+    Free training and support from personal support.
+    Regular promotions and payouts.
+    Be professional with <b>BitOption</b>!
   parthership: |
-    Партнерская программа 50% от депозита получит тот пользователь который дал ссылку своему другу
+    Affiliate program 50% of the Deposit will get the user who gave the link to a friend
 
-    Ваш ID Telegram: ${cid}
-    Ваша пригласительная ссылка Telegram: https://t.me/${bot_name}?start=${cid}
+    Your ID Telegram: <b>${cid}</b>
+    Your invitation link Telegram: https://t.me/${bot_name}?start=${cid}
     ${addtext}
   referer: |
     Вас пригласил ID: ${referer}
   statistic: |
-    Всего партнеров в вашей команде: <b>${team_count} </b>
-    Всего заработано в вашей команде: <b>${team_bal_sum} $</b>
-    Всего инвестировано вашей командой: <b>${team_dep_sum} $</b>
-    Всего инвестировано вашей командой: <b>${team_dep_sum_btc} BTC</b>
+    Всего партнеров в вашей команде: <b>${team_count}</b>
+    Всего заработано в вашей команде: <b>${team_balance_up_sum}</b>
+    Всего инвестировано вашей командой: <b>${team_deposit_sum}</b>
+    Всего инвестировано вашей командой: <b>${team_deposit_sum_bitcoin} BTC</b>
   groups: 'Наши сообщества:'
   top_players:
     greeting: 'Топ-5 Игроки:'
-    text1: '${nickname} заработал у нас: <b>${balance_up} ${currency}</b>'
-  rules: |
-    Финансовые операции, предлагаемые данным ботом, могут обладать повышенным выигрышем,
-    так и проигрышем. Приобретая предлагаемые данным ботом финансовые услуги и инструменты,
-    вы можете понести серьезные финансовые потери или полностью утратить средства,
-    находящиеся на вашем гарантийно-торговом счету. Пожалуйста, оцените все
-    финансовые риски и посоветуйтесь с независимым финансовым консультантом перед
-    началом торговли. BitOption не несет ответственности за любые прямые, косвенные и
-    случайные убытки или любой другой ущерб, связанный с действиями пользователя
-    на данном сайте.
+    text1: '${nickname} заработал у нас: <b>${balance_up}</b>'
+    rules: |
+      Financial transactions proposed by the bot, may have a higher winning and losing.
+      Getting proposed according to the bot financial services and tools, you can suffer
+      serious financial losses or lose all funds, warranty on your trading account.
+      Please rate all the financial risks and seek advice from an independent
+      financial advisor before trading. BitOption is not responsible for any direct,
+      indirect or consequential damages or any other damage associated with
+      user actions on this site.
 
-    Услуги предоставляет ООО ИК "ЦентрСью".
-    Местом оказания услуг является Республика Сейшелы.
+      Services are provided by ООО ИК "ЦентрСью".
+      The place of provision of services is the Republic of Seychelles
   faq:
     greeting: 'Выберите раздел F.A.Q'
     faq_common: |
@@ -180,7 +179,7 @@ about:
 
 balance:
   greeting: |
-    Ваш баланс - <b>${user.balance_rub} ${currency}</b>
+    Ваш баланс - <b>${user.balance} ${currency}</b>
     Ваш баланс - <b>${user.balance_bitcoin} BTC</b>
     Ваш баланс - <b>${user.balance_virtual} ВИРТ</b>
 
@@ -192,7 +191,7 @@ balance:
     Заработано в проекте - <b>${user.balance_up_virtual} ВИРТ</b>
   withdraw: 'На текущий момент вывод средств закрыт'
   deposit: |
-    Your balance: <b>${user.balance_rub} ${currency}</b>
+    Your balance: <b>${user.balance} ${currency}</b>
     Вы можете пополнить баланс следующими способами:
   deposit_started: |
     🚫 Вы уже начали процесс пополнения!
