@@ -43,14 +43,16 @@ bot.use(async ($, next) => {
         let [[user]] = await $.db.execute( 'SELECT * FROM users WHERE telegram_id = ?', [ cid ]);
 
         if (!user) {
-            let nickname = $.util.generate_nickname( msg.from );
+            throw new Error('User not found');
 
-            const [result] = await $.db.query( 'INSERT INTO users SET ?', {
-                telegram_id: cid,
-                nickname: nickname,
-            });
+            // let nickname = $.util.generate_nickname( msg.from );
 
-            [[user]] = await $.db.execute( 'SELECT * FROM users WHERE telegram_id = ?', [ cid ]);
+            // const [result] = await $.db.query( 'INSERT INTO users SET ?', {
+            //     telegram_id: cid,
+            //     nickname: nickname,
+            // });
+
+            // [[user]] = await $.db.execute( 'SELECT * FROM users WHERE telegram_id = ?', [ cid ]);
         }
 
         $.user = user;
