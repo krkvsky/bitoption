@@ -24,6 +24,8 @@ bot.use(Telegraf.memorySession());
 bot.use(Telegraf.log());
 bot.use(i18n.middleware());
 
+require('./lib/util')(bot);
+
 bot.use(async ($, next) => {
     const cid = $.chat.id;
 
@@ -39,9 +41,9 @@ bot.use(async ($, next) => {
             $.user.lang = ['ru','en'].indexOf($.user.lang) < 0 ? config.defaults.locale : $.user.lang;
             $.i18n.locale($.user.lang);
 
-            $.user.balance = $.util.rub_to_user_currency($, $.user.balance_rub);
-            $.user.balance_up = $.util.rub_to_user_currency($, $.user.balance_up_rub);
-            $.user.deposit_sum = $.util.rub_to_user_currency($, $.user.deposit_sum_rub);
+            $.user.balance = $.util.rub_to_user_currency($.user.balance_rub);
+            $.user.balance_up = $.util.rub_to_user_currency($.user.balance_up_rub);
+            $.user.deposit_sum = $.util.rub_to_user_currency($.user.deposit_sum_rub);
         }
     }
     catch (e) {
@@ -55,7 +57,6 @@ bot.use(async ($, next) => {
 });
 
 require('./lib/watchers')(bot);
-require('./lib/util')(bot);
 
 bot.use(flow.middleware());
 
@@ -207,7 +208,7 @@ bot.command('start', async ($) => {
             $.user = user;
         }
 
-        return $.reply($.i18n.t('greeting', { nickname: nickname }), $.util.startup_keyboard($));
+        return $.reply($.i18n.t('greeting', { nickname: nickname }), $.util.startup_keyboard());
     }
     catch(e) {
         console.log(e);

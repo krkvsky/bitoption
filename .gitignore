@@ -4,3 +4,4 @@ botsocket
 package-lock.json
 install.sh
 config.js
+npm-debug.log
