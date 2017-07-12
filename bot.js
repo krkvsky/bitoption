@@ -25,9 +25,11 @@ bot.use(Telegraf.log());
 bot.use(i18n.middleware());
 
 require('./lib/util')(bot);
+console.log('3');
 
 bot.use(async ($, next) => {
     const cid = $.chat.id;
+console.log('4');
 
     try {
         $.db = await pool.getConnection();
@@ -37,6 +39,8 @@ bot.use(async ($, next) => {
 
         if (user) {
             $.user = user;
+console.log(5);
+console.log($.user);
 
             $.user.lang = ['ru','en'].indexOf($.user.lang) < 0 ? config.defaults.locale : $.user.lang;
             $.i18n.locale($.user.lang);

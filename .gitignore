@@ -5,3 +5,5 @@ package-lock.json
 install.sh
 config.js
 npm-debug.log
+*/rates.json
+*/cookies.json
