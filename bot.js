@@ -34,6 +34,7 @@ require('./lib/watchers')(bot);
 
 bot.use(async ($, next) => {
     const cid = $.chat.id;
+    const msg = $.message;
 
     try {
         $.db = await pool.getConnection();
@@ -41,16 +42,25 @@ bot.use(async ($, next) => {
 
         let [[user]] = await $.db.execute( 'SELECT * FROM users WHERE telegram_id = ?', [ cid ]);
 
-        if (user) {
-            $.user = user;
+        if (!user) {
+            let nickname = $.util.generate_nickname( msg.from );
 
-            $.user.lang = ['ru','en'].indexOf($.user.lang) < 0 ? config.defaults.locale : $.user.lang;
-            $.i18n.locale($.user.lang);
+            const [result] = await $.db.query( 'INSERT INTO users SET ?', {
+                telegram_id: cid,
+                nickname: nickname,
+            });
 
-            $.user.balance = $.util.rub_to_user_currency($, $.user.balance_rub);
-            $.user.balance_up = $.util.rub_to_user_currency($, $.user.balance_up_rub);
-            $.user.deposit_sum = $.util.rub_to_user_currency($, $.user.deposit_sum_rub);
+            [[user]] = await $.db.execute( 'SELECT * FROM users WHERE telegram_id = ?', [ cid ]);
         }
+
+        $.user = user;
+
+        $.user.lang = ['ru','en'].indexOf($.user.lang) < 0 ? config.defaults.locale : $.user.lang;
+        $.i18n.locale($.user.lang);
+
+        $.user.balance = $.util.rub_to_user_currency($, $.user.balance_rub);
+        $.user.balance_up = $.util.rub_to_user_currency($, $.user.balance_up_rub);
+        $.user.deposit_sum = $.util.rub_to_user_currency($, $.user.deposit_sum_rub);
     }
     catch (e) {
         console.log(e);
