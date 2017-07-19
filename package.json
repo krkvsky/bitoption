@@ -14,6 +14,7 @@
     "blockchain.info": "^2.8.0",
     "cheerio": "^1.0.0-rc.2",
     "events": "^1.1.1",
+    "forever": "^0.15.3",
     "gdax": "^0.4.2",
     "generate-password": "^1.3.0",
     "is-empty": "^1.2.0",
