@@ -232,6 +232,3 @@ bot.command('start', async ($) => {
 });
 
 bot.startPolling(config.polling.timeout, config.polling.limit);
-
-
-
